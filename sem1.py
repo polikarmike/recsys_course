@@ -74,7 +74,10 @@ def top_n_recommend(
     filtered = movie_stats[movie_stats['rating_count'] >= min_ratings]
     
     # Сортируем: сначала по avg_rating desc, затем по rating_count desc
-    sorted_movies = filtered.sort_values(['avg_rating', 'rating_count'], ascending=[False, False])
+    sorted_movies = filtered.sort_values(
+        ['avg_rating', 'rating_count'], 
+        ascending=[False, False]
+        )
     
     # Берём top-n
     top_movies = sorted_movies.head(n_recommendations)
@@ -113,7 +116,10 @@ def evaluate_rec_systems(
         Словарь {'random_accuracy', 'popular_accuracy'}.
     """
     # Получаем рекомендации
-    random_recs = random_recommend(n_recommendations=n_recommendations, seed=random_state)
+    random_recs = random_recommend(
+        n_recommendations=n_recommendations, 
+        seed=random_state
+        )
     popular_recs_full = top_n_recommend(n_recommendations=n_recommendations)
     popular_recs = [rec[0] for rec in popular_recs_full]  # только movieId
     
